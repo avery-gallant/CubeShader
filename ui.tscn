@@ -1,0 +1,133 @@
+[gd_scene load_steps=7 format=3 uid="uid://dbej3wjxwvj4h"]
+
+[ext_resource type="Script" path="res://ui.gd" id="1_8kvku"]
+[ext_resource type="Shader" path="res://transparency.gdshader" id="1_kn4h8"]
+[ext_resource type="PackedScene" uid="uid://cnx8ojfpv14hg" path="res://curve_edit.tscn" id="3_1h30t"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fmkf4"]
+shader = ExtResource("1_kn4h8")
+shader_parameter/alpha = 0.6
+
+[sub_resource type="LabelSettings" id="LabelSettings_i83m8"]
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nyabf"]
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8kvku")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CurveEdit" parent="VBoxContainer" instance=ExtResource("3_1h30t")]
+visible = false
+layout_mode = 2
+
+[node name="ColorOpen" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/ColorOpen"]
+material = SubResource("ShaderMaterial_fmkf4")
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ColorOpen"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ColorOpen/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/ColorOpen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Color curves"
+label_settings = SubResource("LabelSettings_i83m8")
+horizontal_alignment = 1
+
+[node name="Edit" type="Button" parent="VBoxContainer/ColorOpen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Edit
+"
+
+[node name="LightToggle" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/LightToggle"]
+material = SubResource("ShaderMaterial_fmkf4")
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/LightToggle"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/LightToggle/MarginContainer"]
+layout_mode = 2
+
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer/LightToggle/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_disabled_color = Color(0, 0, 0, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nyabf")
+text = "Show Light"
+
+[node name="RefreshToggle" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/RefreshToggle"]
+material = SubResource("ShaderMaterial_fmkf4")
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/RefreshToggle"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/RefreshToggle/MarginContainer"]
+layout_mode = 2
+
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer/RefreshToggle/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_disabled_color = Color(0, 0, 0, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nyabf")
+text = "Background Refresh"
+
+[connection signal="close" from="VBoxContainer/CurveEdit" to="." method="_on_curve_edit_close"]
+[connection signal="pressed" from="VBoxContainer/ColorOpen/MarginContainer/VBoxContainer/Edit" to="." method="_on_edit_pressed"]

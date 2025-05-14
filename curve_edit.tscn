@@ -1,0 +1,174 @@
+[gd_scene load_steps=25 format=3 uid="uid://cnx8ojfpv14hg"]
+
+[ext_resource type="Script" path="res://curve_edit.gd" id="1_yw0tg"]
+[ext_resource type="Script" path="res://editor.gd" id="2_3n475"]
+[ext_resource type="Texture2D" uid="uid://cnstaki8pbyq0" path="res://xHovered.png" id="2_f2yf4"]
+[ext_resource type="Texture2D" uid="uid://62x38laeaf7w" path="res://x.png" id="2_n46eh"]
+[ext_resource type="Script" path="res://editor_bg.gd" id="3_b5s2w"]
+[ext_resource type="Script" path="res://color_bar.gd" id="3_tqitj"]
+[ext_resource type="Texture2D" uid="uid://c5rbmq0ksst1n" path="res://xPressed.png" id="3_y3asd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_npm7t"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vwxji"]
+texture = ExtResource("2_f2yf4")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_is10l"]
+texture = ExtResource("3_y3asd")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0ol4e"]
+texture = ExtResource("2_n46eh")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wh0co"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rg5lw"]
+bg_color = Color(0.261389, 1.28449e-06, 0.0097041, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pootd"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o1ldl"]
+bg_color = Color(0.147696, 0, 0.0298156, 1)
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_p3w2h"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kfg1v"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_txb7y"]
+bg_color = Color(0, 0.170133, 4.81308e-08, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8debu"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_865nl"]
+bg_color = Color(0, 0.1, 0.0116667, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ikhr5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s7ijj"]
+bg_color = Color(6.37732e-07, 0, 0.352974, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4xcse"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bjm0i"]
+bg_color = Color(0.000738879, 0, 0.126757, 1)
+
+[node name="CurveEdit" type="Control"]
+custom_minimum_size = Vector2(510, 331)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_yw0tg")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+offset_right = 510.0
+offset_bottom = 331.0
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer"]
+layout_mode = 2
+color = Color(0.111197, 0.111197, 0.111197, 1)
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer2"]
+z_as_relative = false
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/MarginContainer2/VBoxContainer/MarginContainer3"]
+layout_mode = 2
+color = Color(0.18359, 0.18359, 0.18359, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer2/VBoxContainer/MarginContainer3"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="close" type="Button" parent="MarginContainer/MarginContainer2/VBoxContainer/MarginContainer3/MarginContainer"]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_npm7t")
+theme_override_styles/hover = SubResource("StyleBoxTexture_vwxji")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_is10l")
+theme_override_styles/normal = SubResource("StyleBoxTexture_0ol4e")
+expand_icon = true
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer2/VBoxContainer/MarginContainer3"]
+layout_mode = 2
+text = "  Color curves"
+uppercase = true
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer2/VBoxContainer"]
+z_index = 12
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+script = ExtResource("3_b5s2w")
+
+[node name="Editor" type="Control" parent="MarginContainer/MarginContainer2/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(500, 250)
+layout_mode = 2
+script = ExtResource("2_3n475")
+
+[node name="colorBar" type="Control" parent="MarginContainer/MarginContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+script = ExtResource("3_tqitj")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Red" type="Button" parent="MarginContainer/MarginContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/focus = SubResource("StyleBoxEmpty_wh0co")
+theme_override_styles/hover = SubResource("StyleBoxFlat_rg5lw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pootd")
+theme_override_styles/normal = SubResource("StyleBoxFlat_o1ldl")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_p3w2h")
+text = "Red"
+
+[node name="Green" type="Button" parent="MarginContainer/MarginContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/focus = SubResource("StyleBoxEmpty_kfg1v")
+theme_override_styles/hover = SubResource("StyleBoxFlat_txb7y")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_8debu")
+theme_override_styles/normal = SubResource("StyleBoxFlat_865nl")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_p3w2h")
+text = "Green"
+
+[node name="Blue" type="Button" parent="MarginContainer/MarginContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ikhr5")
+theme_override_styles/hover = SubResource("StyleBoxFlat_s7ijj")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_4xcse")
+theme_override_styles/normal = SubResource("StyleBoxFlat_bjm0i")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_p3w2h")
+text = "Blue"
+
+[connection signal="visibility_changed" from="." to="MarginContainer/MarginContainer2/VBoxContainer/MarginContainer/Editor" method="_on_curve_edit_visibility_changed"]
+[connection signal="pressed" from="MarginContainer/MarginContainer2/VBoxContainer/MarginContainer3/MarginContainer/close" to="." method="_on_close_pressed"]
+[connection signal="updated" from="MarginContainer/MarginContainer2/VBoxContainer/MarginContainer/Editor" to="MarginContainer/MarginContainer2/VBoxContainer/colorBar" method="_on_editor_updated"]
+[connection signal="pressed" from="MarginContainer/MarginContainer2/VBoxContainer/HBoxContainer/Red" to="." method="_on_red_pressed"]
+[connection signal="pressed" from="MarginContainer/MarginContainer2/VBoxContainer/HBoxContainer/Green" to="." method="_on_green_pressed"]
+[connection signal="pressed" from="MarginContainer/MarginContainer2/VBoxContainer/HBoxContainer/Blue" to="." method="_on_blue_pressed"]
