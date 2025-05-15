@@ -21,6 +21,7 @@ func _process(delta: float) -> void:
 	pass
 	
 func _draw():
+	
 	if initialized:
 		var curveRes = 50
 		var indices = range(len(curves))
@@ -37,7 +38,8 @@ func _draw():
 			if (ptSelect!=-1):
 				var scaledPt = mc(curvePts[ptSelect],cWin)
 				
-				var tanA = deg_to_rad(primaryCurve.get_point_right_tangent(ptSelect))
+				var tanV = primaryCurve.get_point_right_tangent(ptSelect)
+				var tanA = atan(tanV)
 				var tanPtR = Vector2(cos(tanA)*40+scaledPt.x,-sin(tanA)*40+scaledPt.y)
 				var tanPtL = Vector2(cos(tanA+PI)*40+scaledPt.x,-sin(tanA+PI)*40+scaledPt.y)
 				draw_line(Vector2(tanPtR.x,(tanPtR.y)),Vector2(tanPtL.x,(tanPtL.y)),Color(0,0,0,0.75),4)
@@ -92,14 +94,18 @@ func _input(event):
 			queue_redraw()
 		elif stuck == "tangentR":
 			var mousePos = event.position
-			primaryCurve.set_point_right_tangent(ptSelect,rad_to_deg(-(mc(curvePts[ptSelect],cWin)+global_position).angle_to_point(mousePos)))
-			primaryCurve.set_point_left_tangent(ptSelect,rad_to_deg(-(mc(curvePts[ptSelect],cWin)+global_position).angle_to_point(mousePos)))
+			var angle = -(mc(curvePts[ptSelect],cWin)+global_position).angle_to_point(mousePos)
+			var tangent_value = tan(angle)
+			primaryCurve.set_point_right_tangent(ptSelect,tangent_value)
+			primaryCurve.set_point_left_tangent(ptSelect,tangent_value)
 			emit_signal("updated")
 			queue_redraw()
 		elif stuck == "tangentL":
 			var mousePos = event.position
-			primaryCurve.set_point_right_tangent(ptSelect,rad_to_deg(PI-(mc(curvePts[ptSelect],cWin)+global_position).angle_to_point(mousePos)))
-			primaryCurve.set_point_left_tangent(ptSelect,rad_to_deg(PI-(mc(curvePts[ptSelect],cWin)+global_position).angle_to_point(mousePos)))
+			var angle = PI-(mc(curvePts[ptSelect],cWin)+global_position).angle_to_point(mousePos)
+			var tangent_value = tan(angle)
+			primaryCurve.set_point_right_tangent(ptSelect,tangent_value)
+			primaryCurve.set_point_left_tangent(ptSelect,tangent_value)
 			emit_signal("updated")
 			queue_redraw()
 	elif event is InputEventMouseButton:
@@ -108,7 +114,8 @@ func _input(event):
 			if ptSelect!=-1:
 				var scaledPt = mc(curvePts[ptSelect],cWin)+global_position
 				
-				var tanA = deg_to_rad(primaryCurve.get_point_right_tangent(ptSelect))
+				var tanV = primaryCurve.get_point_right_tangent(ptSelect)
+				var tanA = atan(tanV)
 				var tanPtR = Vector2(cos(tanA)*40+scaledPt.x,-sin(tanA)*40+scaledPt.y)
 				var tanPtL = Vector2(cos(tanA+PI)*40+scaledPt.x,-sin(tanA+PI)*40+scaledPt.y)
 				
@@ -185,6 +192,8 @@ func editCurve(primary):
 		curveColors[i].a=0.4
 	curveColors[primary].a=1
 	primaryCurve = curves[primary]
+	for i in range(primaryCurve.point_count):
+		print(primaryCurve.get_point_left_tangent(i))
 	curvePts=[]
 	ptSelect = -1
 	closePt = -1
@@ -193,3 +202,14 @@ func editCurve(primary):
 		var pt = primaryCurve.get_point_position(i)
 		curvePts.append(Vector2(pt.x,1-pt.y))
 	queue_redraw()
+
+func flatten(curveIn:Curve):
+	curveIn.clear_points()
+	curveIn.add_point(Vector2(0,0),1,1)
+	curveIn.add_point(Vector2(1,1),1,1)
+	queue_redraw()
+	emit_signal("updated")
+
+func _on_flatten_pressed() -> void:
+	for c in curves:
+		flatten(c)

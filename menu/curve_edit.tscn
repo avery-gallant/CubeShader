@@ -1,23 +1,35 @@
-[gd_scene load_steps=25 format=3 uid="uid://cnx8ojfpv14hg"]
+[gd_scene load_steps=31 format=3 uid="uid://cnx8ojfpv14hg"]
 
-[ext_resource type="Script" path="res://curve_edit.gd" id="1_yw0tg"]
-[ext_resource type="Script" path="res://editor.gd" id="2_3n475"]
-[ext_resource type="Texture2D" uid="uid://cnstaki8pbyq0" path="res://xHovered.png" id="2_f2yf4"]
-[ext_resource type="Texture2D" uid="uid://62x38laeaf7w" path="res://x.png" id="2_n46eh"]
-[ext_resource type="Script" path="res://editor_bg.gd" id="3_b5s2w"]
-[ext_resource type="Script" path="res://color_bar.gd" id="3_tqitj"]
-[ext_resource type="Texture2D" uid="uid://c5rbmq0ksst1n" path="res://xPressed.png" id="3_y3asd"]
+[ext_resource type="Script" path="res://menu/curve_edit.gd" id="1_4o2ck"]
+[ext_resource type="Texture2D" uid="uid://cnstaki8pbyq0" path="res://assets/xHovered.png" id="2_ak5pk"]
+[ext_resource type="Texture2D" uid="uid://bivk42p1souor" path="res://assets/flatHovered - Copy.png" id="2_wfkmf"]
+[ext_resource type="Texture2D" uid="uid://capue7i7horqy" path="res://assets/flatPressed.png" id="3_1xcs1"]
+[ext_resource type="Texture2D" uid="uid://c5rbmq0ksst1n" path="res://assets/xPressed.png" id="3_tfndg"]
+[ext_resource type="Texture2D" uid="uid://62x38laeaf7w" path="res://assets/x.png" id="4_nr3ep"]
+[ext_resource type="Texture2D" uid="uid://y68pm5f75w53" path="res://assets/flat.png" id="4_xqilo"]
+[ext_resource type="Script" path="res://menu/editor_bg.gd" id="5_lgsdk"]
+[ext_resource type="Script" path="res://menu/editor.gd" id="6_vedvb"]
+[ext_resource type="Script" path="res://menu/color_bar.gd" id="7_2rjdk"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_npm7t"]
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ks2yh"]
+texture = ExtResource("2_wfkmf")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wuyco"]
+texture = ExtResource("3_1xcs1")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vwf7l"]
+texture = ExtResource("4_xqilo")
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vwxji"]
-texture = ExtResource("2_f2yf4")
+texture = ExtResource("2_ak5pk")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_is10l"]
-texture = ExtResource("3_y3asd")
+texture = ExtResource("3_tfndg")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0ol4e"]
-texture = ExtResource("2_n46eh")
+texture = ExtResource("4_nr3ep")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wh0co"]
 
@@ -58,7 +70,7 @@ bg_color = Color(0.000738879, 0, 0.126757, 1)
 custom_minimum_size = Vector2(510, 331)
 layout_mode = 3
 anchors_preset = 0
-script = ExtResource("1_yw0tg")
+script = ExtResource("1_4o2ck")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -95,7 +107,22 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="close" type="Button" parent="MarginContainer/MarginContainer2/VBoxContainer/MarginContainer3/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer2/VBoxContainer/MarginContainer3/MarginContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="flatten" type="Button" parent="MarginContainer/MarginContainer2/VBoxContainer/MarginContainer3/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_npm7t")
+theme_override_styles/hover = SubResource("StyleBoxTexture_ks2yh")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_wuyco")
+theme_override_styles/normal = SubResource("StyleBoxTexture_vwf7l")
+expand_icon = true
+
+[node name="close" type="Button" parent="MarginContainer/MarginContainer2/VBoxContainer/MarginContainer3/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(15, 15)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -118,17 +145,17 @@ theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
-script = ExtResource("3_b5s2w")
+script = ExtResource("5_lgsdk")
 
 [node name="Editor" type="Control" parent="MarginContainer/MarginContainer2/VBoxContainer/MarginContainer"]
 custom_minimum_size = Vector2(500, 250)
 layout_mode = 2
-script = ExtResource("2_3n475")
+script = ExtResource("6_vedvb")
 
 [node name="colorBar" type="Control" parent="MarginContainer/MarginContainer2/VBoxContainer"]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
-script = ExtResource("3_tqitj")
+script = ExtResource("7_2rjdk")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer2/VBoxContainer"]
 layout_mode = 2
@@ -167,7 +194,8 @@ button_group = SubResource("ButtonGroup_p3w2h")
 text = "Blue"
 
 [connection signal="visibility_changed" from="." to="MarginContainer/MarginContainer2/VBoxContainer/MarginContainer/Editor" method="_on_curve_edit_visibility_changed"]
-[connection signal="pressed" from="MarginContainer/MarginContainer2/VBoxContainer/MarginContainer3/MarginContainer/close" to="." method="_on_close_pressed"]
+[connection signal="pressed" from="MarginContainer/MarginContainer2/VBoxContainer/MarginContainer3/MarginContainer/HBoxContainer/flatten" to="MarginContainer/MarginContainer2/VBoxContainer/MarginContainer/Editor" method="_on_flatten_pressed"]
+[connection signal="pressed" from="MarginContainer/MarginContainer2/VBoxContainer/MarginContainer3/MarginContainer/HBoxContainer/close" to="." method="_on_close_pressed"]
 [connection signal="updated" from="MarginContainer/MarginContainer2/VBoxContainer/MarginContainer/Editor" to="MarginContainer/MarginContainer2/VBoxContainer/colorBar" method="_on_editor_updated"]
 [connection signal="pressed" from="MarginContainer/MarginContainer2/VBoxContainer/HBoxContainer/Red" to="." method="_on_red_pressed"]
 [connection signal="pressed" from="MarginContainer/MarginContainer2/VBoxContainer/HBoxContainer/Green" to="." method="_on_green_pressed"]

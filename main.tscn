@@ -3,8 +3,7 @@
 [ext_resource type="Script" path="res://main.gd" id="1_07yam"]
 [ext_resource type="PackedScene" uid="uid://daaqj08kvyy4o" path="res://background.tscn" id="2_2eh5t"]
 [ext_resource type="Shader" path="res://background_mesh.gdshader" id="3_ti7mr"]
-[ext_resource type="Script" path="res://cube.gd" id="4_a43u8"]
-[ext_resource type="PackedScene" uid="uid://dbej3wjxwvj4h" path="res://ui.tscn" id="5_mq32u"]
+[ext_resource type="PackedScene" uid="uid://dbej3wjxwvj4h" path="res://menu/ui.tscn" id="5_mq32u"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y32ct"]
 resource_local_to_scene = true
@@ -37,6 +36,20 @@ albedo_color = Color(0, 0, 0, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_yyc43"]
 material = SubResource("StandardMaterial3D_d1e6v")
 size = Vector3(1.5, 1.5, 1.5)
+
+[sub_resource type="GDScript" id="GDScript_31r56"]
+script/source = "extends MeshInstance3D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_52726"]
 shading_mode = 0
@@ -73,9 +86,6 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5.8
 environment = SubResource("Environment_m1vvf")
 size = 9.03671
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 693.377, 0)
-
 [node name="Pivot" type="Node3D" parent="."]
 transform = Transform3D(0.89558, 0, 0.444901, 0, 1, 0, -0.444901, 0, 0.89558, 0, 0, 0)
 
@@ -104,7 +114,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.026, 0.75, -1.32)
 transparency = 0.06
 cast_shadow = 2
 mesh = SubResource("BoxMesh_yyc43")
-script = ExtResource("4_a43u8")
+script = SubResource("GDScript_31r56")
 
 [node name="Innercube" type="MeshInstance3D" parent="Cube"]
 mesh = SubResource("BoxMesh_t2nt4")

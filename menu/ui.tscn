@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://dbej3wjxwvj4h"]
 
-[ext_resource type="Script" path="res://ui.gd" id="1_8kvku"]
+[ext_resource type="Script" path="res://menu/ui.gd" id="1_8kvku"]
 [ext_resource type="Shader" path="res://transparency.gdshader" id="1_kn4h8"]
-[ext_resource type="PackedScene" uid="uid://cnx8ojfpv14hg" path="res://curve_edit.tscn" id="3_1h30t"]
+[ext_resource type="PackedScene" uid="uid://cnx8ojfpv14hg" path="res://menu/curve_edit.tscn" id="3_1h30t"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fmkf4"]
 shader = ExtResource("1_kn4h8")

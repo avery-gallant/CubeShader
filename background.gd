@@ -1,7 +1,8 @@
 extends Node2D
-var redCurve:Curve = preload("res://red.tres")
-var greenCurve:Curve = preload("res://green.tres")
-var blueCurve:Curve = preload("res://blue.tres")
+var redCurve:Curve = preload("res://curves/red.tres")
+var greenCurve:Curve = preload("res://curves/green.tres")
+var blueCurve:Curve = preload("res://curves/blue.tres")
+var widCurve:Curve = preload("res://curves/width.tres")
 var doDraw = true
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -21,8 +22,9 @@ func _draw():
 		var randR = redCurve.sample_baked(randC)
 		var randG = greenCurve.sample_baked(randC)
 		var randB = blueCurve.sample_baked(randC)
-		var randW = randi_range(100,300)
-		var randHt= randi_range(10,150)
+		var randW = 15+200*widCurve.sample_baked(randf_range(0,1))
+		randi_range(100,300)
+		var randHt= randi_range(70,150)
 		
 		draw_set_transform(Vector2(randX-randW/2,randY-randHt/2),randAng)
 		draw_rect(Rect2(0, 0, randW, randHt), Color(randR,randG,randB))
