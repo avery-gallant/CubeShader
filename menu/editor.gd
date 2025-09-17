@@ -23,7 +23,7 @@ func _process(delta: float) -> void:
 func _draw():
 	
 	if initialized:
-		var curveRes = 50
+		var curveRes = 200
 		var indices = range(len(curves))
 		indices.reverse()
 		for i in indices:
@@ -85,11 +85,49 @@ func _input(event):
 			var newPt=dc(event.position-global_position,cWin)
 			newPt.x = clampf(newPt.x,0,1)
 			newPt.y = clampf(newPt.y,0,1)
-			curvePts[closePt]=newPt
 			
-			primaryCurve.set_point_value(closePt,1-newPt.y)
-			primaryCurve.set_point_offset(closePt,newPt.x)
-			
+			if closePt!=len(curvePts)-1 && newPt.x>=curvePts[closePt+1].x:
+				if (newPt.x>=curvePts[closePt+1].x):
+					newPt.x+=0.001
+				curvePts[closePt] = curvePts[closePt+1]
+				curvePts[closePt+1] = newPt
+				var closeTn = primaryCurve.get_point_left_tangent(closePt)
+				var otherTn = primaryCurve.get_point_left_tangent(closePt+1)
+				primaryCurve.set_point_left_tangent(closePt,otherTn)
+				primaryCurve.set_point_left_tangent(closePt+1, closeTn)
+				primaryCurve.set_point_right_tangent(closePt,otherTn)
+				primaryCurve.set_point_right_tangent(closePt+1, closeTn)
+				primaryCurve.set_point_value(closePt+1,1-newPt.y)
+				primaryCurve.set_point_offset(closePt+1,newPt.x)
+				primaryCurve.set_point_value(closePt,1-curvePts[closePt].y)
+				primaryCurve.set_point_offset(closePt,curvePts[closePt].x)
+				
+				ptSelect = ptSelect+1
+				closePt = closePt+1
+				
+			elif closePt !=0 && newPt.x<=curvePts[closePt-1].x:
+				if (newPt.x>=curvePts[closePt-1].x):
+					newPt.x-=0.001
+				curvePts[closePt] = curvePts[closePt-1]
+				curvePts[closePt-1] = newPt
+				var closeTn = primaryCurve.get_point_left_tangent(closePt)
+				var otherTn = primaryCurve.get_point_left_tangent(closePt-1)
+				primaryCurve.set_point_left_tangent(closePt,otherTn)
+				primaryCurve.set_point_left_tangent(closePt-1, closeTn)
+				primaryCurve.set_point_right_tangent(closePt,otherTn)
+				primaryCurve.set_point_right_tangent(closePt-1, closeTn)
+				primaryCurve.set_point_value(closePt-1,1-newPt.y)
+				primaryCurve.set_point_offset(closePt-1,newPt.x)
+				primaryCurve.set_point_value(closePt,1-curvePts[closePt].y)
+				primaryCurve.set_point_offset(closePt,curvePts[closePt].x)
+				ptSelect = ptSelect -1
+				closePt = closePt-1
+					
+			else:
+				curvePts[closePt]=newPt
+				primaryCurve.set_point_value(closePt,1-newPt.y)
+				primaryCurve.set_point_offset(closePt,newPt.x)
+
 			emit_signal("updated")
 			queue_redraw()
 		elif stuck == "tangentR":
@@ -192,8 +230,6 @@ func editCurve(primary):
 		curveColors[i].a=0.4
 	curveColors[primary].a=1
 	primaryCurve = curves[primary]
-	for i in range(primaryCurve.point_count):
-		print(primaryCurve.get_point_left_tangent(i))
 	curvePts=[]
 	ptSelect = -1
 	closePt = -1
