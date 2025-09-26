@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bivk42p1souor"
-path="res://.godot/imported/flatHovered - Copy.png-7691b814afc4043594e149ddc02163e7.ctex"
+uid="uid://8h0boiciav32"
+path="res://.godot/imported/flatHovered.png-4830936463942978a88db456ca5f1150.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/flatHovered - Copy.png"
-dest_files=["res://.godot/imported/flatHovered - Copy.png-7691b814afc4043594e149ddc02163e7.ctex"]
+source_file="res://assets/flatHovered.png"
+dest_files=["res://.godot/imported/flatHovered.png-4830936463942978a88db456ca5f1150.ctex"]
 
 [params]
 

@@ -4,6 +4,7 @@ extends Node3D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$MeshInstance3D.mesh.material.set_shader_parameter("viewport_texture", $SubViewport.get_texture())
+	
 	$UI.init($SubViewport/Background.redCurve,$SubViewport/Background.greenCurve,$SubViewport/Background.blueCurve)
 	$UI/VBoxContainer/LightToggle/MarginContainer/VBoxContainer/CheckBox.connect("toggled", toggle_light)
 	$UI/VBoxContainer/RefreshToggle/MarginContainer/VBoxContainer/CheckBox.connect("toggled", $SubViewport/Background.toggleRedraw)
@@ -22,7 +23,8 @@ func _process(delta: float) -> void:
 		$Cube.position.z-=0.03
 	if Input.is_action_pressed("Back"):
 		$Cube.position.z+=0.03
-	
+	$Cube.position.x = clamp($Cube.position.x,-8.75,8.75)
+	$Cube.position.z = clamp($Cube.position.z,-5.25,5.25)
 	
 	if Input.is_action_pressed("LightForth"):
 		$Pivot/SpotLight3D.position.x+=0.1
@@ -37,3 +39,7 @@ func _process(delta: float) -> void:
 func toggle_light(on):
 	$Pivot/Line.visible = on
 	$Pivot/SpotLight3D/Ball.visible = on
+
+
+func _on_ui_threshold_changed(value) -> void:
+	$MeshInstance3D.mesh.material.set_shader_parameter("threshold", value)

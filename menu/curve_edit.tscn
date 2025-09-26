@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://menu/curve_edit.gd" id="1_4o2ck"]
 [ext_resource type="Texture2D" uid="uid://cnstaki8pbyq0" path="res://assets/xHovered.png" id="2_ak5pk"]
-[ext_resource type="Texture2D" uid="uid://bivk42p1souor" path="res://assets/flatHovered - Copy.png" id="2_wfkmf"]
+[ext_resource type="Texture2D" uid="uid://8h0boiciav32" path="res://assets/flatHovered.png" id="2_qv1bc"]
 [ext_resource type="Texture2D" uid="uid://capue7i7horqy" path="res://assets/flatPressed.png" id="3_1xcs1"]
 [ext_resource type="Texture2D" uid="uid://c5rbmq0ksst1n" path="res://assets/xPressed.png" id="3_tfndg"]
 [ext_resource type="Texture2D" uid="uid://62x38laeaf7w" path="res://assets/x.png" id="4_nr3ep"]
@@ -14,7 +14,7 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_npm7t"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ks2yh"]
-texture = ExtResource("2_wfkmf")
+texture = ExtResource("2_qv1bc")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wuyco"]
 texture = ExtResource("3_1xcs1")
@@ -37,7 +37,7 @@ texture = ExtResource("4_nr3ep")
 bg_color = Color(0.261389, 1.28449e-06, 0.0097041, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pootd"]
-bg_color = Color(0, 0, 0, 1)
+bg_color = Color(0.756863, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o1ldl"]
 bg_color = Color(0.147696, 0, 0.0298156, 1)
@@ -50,7 +50,7 @@ bg_color = Color(0.147696, 0, 0.0298156, 1)
 bg_color = Color(0, 0.170133, 4.81308e-08, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8debu"]
-bg_color = Color(0, 0, 0, 1)
+bg_color = Color(0, 0.56847, 7.70092e-07, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_865nl"]
 bg_color = Color(0, 0.1, 0.0116667, 1)
@@ -61,7 +61,7 @@ bg_color = Color(0, 0.1, 0.0116667, 1)
 bg_color = Color(6.37732e-07, 0, 0.352974, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4xcse"]
-bg_color = Color(0, 0, 0, 1)
+bg_color = Color(0, 0, 0.8, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bjm0i"]
 bg_color = Color(0.000738879, 0, 0.126757, 1)
@@ -116,6 +116,7 @@ custom_minimum_size = Vector2(15, 15)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
+tooltip_text = "Flatten Curves"
 theme_override_styles/focus = SubResource("StyleBoxEmpty_npm7t")
 theme_override_styles/hover = SubResource("StyleBoxTexture_ks2yh")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_wuyco")
@@ -127,6 +128,7 @@ custom_minimum_size = Vector2(15, 15)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
+tooltip_text = "Back to main menu"
 theme_override_styles/focus = SubResource("StyleBoxEmpty_npm7t")
 theme_override_styles/hover = SubResource("StyleBoxTexture_vwxji")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_is10l")
@@ -194,6 +196,8 @@ button_group = SubResource("ButtonGroup_p3w2h")
 text = "Blue"
 
 [connection signal="visibility_changed" from="." to="MarginContainer/MarginContainer2/VBoxContainer/MarginContainer/Editor" method="_on_curve_edit_visibility_changed"]
+[connection signal="mouse_entered" from="MarginContainer/MarginContainer2/VBoxContainer/MarginContainer3/MarginContainer/HBoxContainer/flatten" to="." method="_on_flatten_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/MarginContainer2/VBoxContainer/MarginContainer3/MarginContainer/HBoxContainer/flatten" to="." method="_on_flatten_mouse_exited"]
 [connection signal="pressed" from="MarginContainer/MarginContainer2/VBoxContainer/MarginContainer3/MarginContainer/HBoxContainer/flatten" to="MarginContainer/MarginContainer2/VBoxContainer/MarginContainer/Editor" method="_on_flatten_pressed"]
 [connection signal="pressed" from="MarginContainer/MarginContainer2/VBoxContainer/MarginContainer3/MarginContainer/HBoxContainer/close" to="." method="_on_close_pressed"]
 [connection signal="updated" from="MarginContainer/MarginContainer2/VBoxContainer/MarginContainer/Editor" to="MarginContainer/MarginContainer2/VBoxContainer/colorBar" method="_on_editor_updated"]

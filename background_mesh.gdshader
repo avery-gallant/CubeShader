@@ -1,5 +1,6 @@
 shader_type spatial;
 uniform sampler2D viewport_texture : filter_nearest;
+uniform float threshold = 0.3;
 void vertex(){
 
 }
@@ -18,7 +19,7 @@ void light() {
 		SPECULAR_LIGHT = vec3(0.0);
 	}
 	else{
-		if (L<0.3){
+		if (L<threshold){
 		    	DIFFUSE_LIGHT=vec3(1);
 				SPECULAR_LIGHT = vec3(0.0);
 			}

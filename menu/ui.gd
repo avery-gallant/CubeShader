@@ -1,5 +1,5 @@
 extends Control
-
+signal ThresholdChanged
 @onready
 var cEdit = $VBoxContainer/CurveEdit
 # Called when the node enters the scene tree for the first time.
@@ -33,3 +33,7 @@ func close():
 func open(redCurve,greenCurve,blueCurve):
 	visible = true
 	cEdit.init([redCurve,greenCurve,blueCurve])
+
+
+func _on_h_slider_value_changed(value: float) -> void:
+	ThresholdChanged.emit(value)

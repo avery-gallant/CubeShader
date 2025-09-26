@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dbej3wjxwvj4h"]
+[gd_scene load_steps=10 format=3 uid="uid://dbej3wjxwvj4h"]
 
 [ext_resource type="Script" path="res://menu/ui.gd" id="1_8kvku"]
 [ext_resource type="Shader" path="res://transparency.gdshader" id="1_kn4h8"]
@@ -6,18 +6,29 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fmkf4"]
 shader = ExtResource("1_kn4h8")
-shader_parameter/alpha = 0.6
+shader_parameter/alpha = 0.9
 
 [sub_resource type="LabelSettings" id="LabelSettings_i83m8"]
-font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4c0jk"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5j8hq"]
+bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nyabf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lbj7e"]
 
 [node name="UI" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 10.0
+offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_8kvku")
@@ -37,6 +48,7 @@ layout_mode = 2
 [node name="ColorRect" type="ColorRect" parent="VBoxContainer/ColorOpen"]
 material = SubResource("ShaderMaterial_fmkf4")
 layout_mode = 2
+color = Color(0.247059, 0.247059, 0.247059, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ColorOpen"]
 layout_mode = 2
@@ -59,12 +71,45 @@ layout_mode = 2
 text = "Edit
 "
 
+[node name="ThresholdSlider" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/ThresholdSlider"]
+material = SubResource("ShaderMaterial_fmkf4")
+layout_mode = 2
+color = Color(0.247059, 0.247059, 0.247059, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ThresholdSlider"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ThresholdSlider/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/ThresholdSlider/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Shadow Threshold"
+horizontal_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/ThresholdSlider/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_4c0jk")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_5j8hq")
+max_value = 1.0
+step = 0.01
+value = 0.3
+
 [node name="LightToggle" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="VBoxContainer/LightToggle"]
 material = SubResource("ShaderMaterial_fmkf4")
 layout_mode = 2
+color = Color(0.247059, 0.247059, 0.247059, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/LightToggle"]
 layout_mode = 2
@@ -78,19 +123,19 @@ layout_mode = 2
 
 [node name="CheckBox" type="CheckBox" parent="VBoxContainer/LightToggle/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_disabled_color = Color(1, 1, 1, 1)
 theme_override_styles/focus = SubResource("StyleBoxEmpty_nyabf")
 text = "Show Light"
 
@@ -100,6 +145,7 @@ layout_mode = 2
 [node name="ColorRect" type="ColorRect" parent="VBoxContainer/RefreshToggle"]
 material = SubResource("ShaderMaterial_fmkf4")
 layout_mode = 2
+color = Color(0.247059, 0.247059, 0.247059, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/RefreshToggle"]
 layout_mode = 2
@@ -113,21 +159,22 @@ layout_mode = 2
 
 [node name="CheckBox" type="CheckBox" parent="VBoxContainer/RefreshToggle/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_disabled_color = Color(0, 0, 0, 1)
-theme_override_styles/focus = SubResource("StyleBoxEmpty_nyabf")
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_disabled_color = Color(1, 1, 1, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_lbj7e")
 text = "Background Refresh"
 
 [connection signal="close" from="VBoxContainer/CurveEdit" to="." method="_on_curve_edit_close"]
 [connection signal="pressed" from="VBoxContainer/ColorOpen/MarginContainer/VBoxContainer/Edit" to="." method="_on_edit_pressed"]
+[connection signal="value_changed" from="VBoxContainer/ThresholdSlider/MarginContainer/VBoxContainer/HSlider" to="." method="_on_h_slider_value_changed"]

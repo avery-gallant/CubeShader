@@ -15,6 +15,7 @@ func init(curvesIn:Array):
 func display():
 	editor.display()
 	visible = true
+	
 func closeDisplay():
 	visible = false
 	editor.close()
